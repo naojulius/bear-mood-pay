@@ -79,7 +79,8 @@ export const BearCard = component$(() => {
 
   return (
     <>
-      <div class="relative w-3/10 h-42 rounded-md shadow border-2 border-amber-700 border-b-5 bg-amber-100 inline-flex flex-col gap-2">
+      <div class="relative  w-1/3 h-42 p-1">
+      <div class="size-full rounded-md shadow border-2 border-amber-700 border-b-5 bg-amber-100 inline-flex flex-col gap-2">
         <div class="w-full inline-flex justify-between items-center">
           <div class="text-xs font-bold px-2 inline-flex items-center gap-1 w-full">
             {buttonState.value === 'destroy' ? (
@@ -97,7 +98,6 @@ export const BearCard = component$(() => {
               Lv.0
             </div>
           ) : (<></>)}
-
         </div>
         
         <div class="inline-flex items-center justify-center pt-4">
@@ -111,7 +111,7 @@ export const BearCard = component$(() => {
         </div>
 
 
-        <div class="absolute bottom-0 left-0 h-8 bg-amber-300 w-full  rounded-b-md border-amber-700 font-bold inline-flex justify-center items-center shadow-md">
+        <div class="bg-amber-300 w-full h-full  rounded-b-md font-bold inline-flex justify-center items-center shadow-md">
           <div class="size-full">
             {buttonState.value === 'timer' ? (
               <div class="size-full inline-flex items-center justify-center gap-2">
@@ -141,6 +141,7 @@ export const BearCard = component$(() => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </>
   );
