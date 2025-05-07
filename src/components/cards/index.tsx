@@ -1,19 +1,24 @@
-import { $, component$, useSignal, useTask$} from "@builder.io/qwik";
+import { $, component$, useSignal, useTask$ } from "@builder.io/qwik";
 import BearNeutralEmoji from '~/assets/images/emojis/neutral.png?jsx';
 import BearCryEmoji from '~/assets/images/emojis/cry.png?jsx';
 import BearMoneyEmoji from '~/assets/images/emojis/money.png?jsx';
 import StopWatchImage from '~/assets/images/money/stopwatch.png?jsx';
-import { getAdController } from "~/libs/adsgram";
+import { IoSyncSolid } from "@qwikest/icons/ionicons";
+import { showMonetagAd } from "~/libs/monetag";
+import { addCoins, useCoinStore } from "~/stores/coin.store";
+
 
 export const BearCard = component$(() => {
-  const timeLeft = useSignal(1 * 2);
+  const coinStore = useCoinStore();
+  
+  const timeLeft = useSignal(1 * 3);
   const disabled = useSignal(false);
   const cardScratches = useSignal(0);
   const cardScratchesLimit = useSignal(2);
   const cardScratchesStep = useSignal(1);
   const isCardDestroyed = useSignal(false);
 
-  const buttonState = useSignal<'start' | 'claim' | 'timer' | 'destroy'>('start');
+  const buttonState = useSignal<'start' | 'claim' | 'timer' | 'destroy' | 'loading'>('start');
 
   useTask$(({ track }) => {
     const scratches = track(() => cardScratches.value); // React to changes
@@ -26,7 +31,7 @@ export const BearCard = component$(() => {
       // Perform any logic here (disable button, trigger modal, etc.)
     }
   });
-
+  
   const startTimer = $(() => {
     if (isCardDestroyed.value) { return }
     buttonState.value = "timer";
@@ -51,36 +56,29 @@ export const BearCard = component$(() => {
 
   const handleClaimReward = $(() => {
     if (isCardDestroyed.value) { return }
-    cardScratches.value += cardScratchesStep.value;
-    buttonState.value = "start";
-    console.log('Reward Claimed!');
+    showMonetagAd().then(() => {
+      cardScratches.value += cardScratchesStep.value;
+      buttonState.value = "start";
+      addCoins(coinStore, 50);
+      console.log('Reward Claimed!');
+
+    }).catch((err) => {
+      buttonState.value = "start";
+      console.error('Failed to show ad:', err);
+    });
     // Add any reward logic here
   });
 
   const clickCard = $(() => {
     if (isCardDestroyed.value) { return }
     if (disabled.value) { return }
-    const AdController = getAdController();
-    if (!AdController) {
-      console.warn('AdController not initialized');
-      return;
-    }
-
-    AdController.show()
-      .then((result) => {
-        startTimer();
-        console.log('✅ Ad watched or closed:', result);
-        // Reward the user
-      })
-      .catch((result) => {
-        console.log('❌ Ad error or skipped:', result);
-        // Handle error
-      });
+    buttonState.value = "loading";  
+    startTimer();
   });
 
   return (
     <>
-      <div class="relative h-46 w-32 rounded-md shadow-sm border-2 border-amber-700 bg-amber-100">
+      <div class="relative h-52 w-40 rounded-md shadow border-2 border-amber-700 border-b-5 bg-amber-100">
         <div class="w-full inline-flex justify-between items-center">
           <div class="text-sm font-bold px-2 inline-flex items-center gap-1 w-full">
             {buttonState.value === 'destroy' ? (
@@ -101,16 +99,16 @@ export const BearCard = component$(() => {
 
         </div>
         {buttonState.value === 'destroy' ? (
-          <BearCryEmoji class="p-4 z-30 transition-all duratio-500" />
+          <BearCryEmoji class="p-6 z-30 transition-all duratio-500" />
         ) : buttonState.value === 'claim' ? (
-          <BearMoneyEmoji class="p-4 z-30 transition-all duratio-500" />
-        ): (
-          <BearNeutralEmoji class="p-4 z-30 transition-all duratio-500" />
+          <BearMoneyEmoji class="p-6 z-30 transition-all duratio-500" />
+        ) : (
+          <BearNeutralEmoji class="p-6 z-30 transition-all duratio-500" />
         )}
 
 
-        <div class="absolute bottom-0 left-0 h-8 bg-amber-300 w-full border-t-2 rounded-b-md border-amber-700 font-bold inline-flex justify-center items-center">
-          <div class="text-sm inline-flex font-bold items-center gap-2">
+        <div class="absolute bottom-0 left-0 h-8 bg-amber-300 w-full  rounded-b-md border-amber-700 font-bold inline-flex justify-center items-center shadow-md">
+          <div class="size-full">
             {buttonState.value === 'timer' ? (
               <>
                 <StopWatchImage class="size-6" />
@@ -121,11 +119,19 @@ export const BearCard = component$(() => {
                 Claim Reward
               </button>
             ) : buttonState.value === 'destroy' ? (
-              <button onClick$={handleClaimReward} class="size-full z-20">
-                destroy card
+              <button  class="size-full z-20">
+                Destroy Card
               </button>
-            ) : (
-              <button onClick$={clickCard} disabled={disabled.value ? true : undefined} class="size-full">
+            ) : buttonState.value === 'loading' ? (
+              <div class="size-full inline-flex flex-row gap-1 items-center justify-center">
+                <div class="text-2xl animate animate-spin">
+                  <IoSyncSolid />
+                </div>
+                <div class="size-full">
+                  Loading
+                </div>
+              </div>) : (
+              <button onClick$={clickCard} disabled={disabled.value ? true : undefined} class="w-full h-full bg-amber-400">
                 Farm Mood
               </button>
             )}

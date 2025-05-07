@@ -1,19 +1,7 @@
-// src/types/global.d.ts
-export interface ShowPromiseResult {
-    reason?: string;
+export {};
+
+declare global {
+  interface Window {
+    show_9304204?: () => Promise<void>;
   }
-  
-  interface AdsgramController {
-    show: () => Promise<ShowPromiseResult>;
-  }
-  
-  interface AdsgramAPI {
-    init: (options: { blockId: string }) => AdsgramController;
-  }
-  
-  declare global {
-    interface Window {
-      Adsgram?: AdsgramAPI;
-    }
-  }
-  
+}

@@ -29,6 +29,7 @@ export default component$(() => {
         )}
         <RouterHead />
         <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+        <script src='//whephiwums.com/sdk.js' data-zone='9304204' data-sdk='show_9304204'></script>
       </head>
       <body lang="en">
         <RouterOutlet />

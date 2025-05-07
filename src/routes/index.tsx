@@ -1,24 +1,36 @@
 import { $, component$, useOnWindow} from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { BearCard } from "~/components/cards";
-import { initAdController } from "~/libs/adsgram";
+import { CardList } from "~/components/pages/card-list";
+import { Exchange } from "~/components/pages/exchange";
+import { Mail } from "~/components/pages/mail";
+import { Setting } from "~/components/pages/setting";
+import { Shop } from "~/components/pages/shop";
+import { initMonetagScript } from "~/libs/monetag";
+import { useTabStore } from "~/stores/main.tab.store";
 
 export default component$(() => {
+
+  const tabStore = useTabStore();
+
   useOnWindow(
     'load', $(() => {
-      initAdController();
+      initMonetagScript();
     })
   );
 
   return (
     <>
-      <BearCard />
+      {tabStore.activeTab === 'card' && <CardList />}
+      {tabStore.activeTab === 'shop' && <Shop />}
+      {tabStore.activeTab === 'setting' && <Setting />}
+      {tabStore.activeTab === 'exchange' && <Exchange />}
+      {tabStore.activeTab === 'mail' && <Mail />}
     </>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Bear Mood Play",
   meta: [
     {
       name: "description",

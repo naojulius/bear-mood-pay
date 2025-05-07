@@ -1,7 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import ProfileImage from '~/assets/images/bear/000.png?jsx';
 
-
 export const Profile = component$(() => {
     return (
         <>
