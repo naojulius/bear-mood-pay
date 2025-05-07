@@ -84,17 +84,17 @@ export const BearCard = component$(() => {
         <div class="w-full inline-flex justify-between items-center">
           <div class="text-xs font-bold px-2 inline-flex items-center gap-1 w-full">
             {buttonState.value === 'destroy' ? (
-              <div class="text-center w-full">
+              <div class="text-center w-full textè-sm fredoka-condensed-bold">
                 limit reached
               </div>
             ) : (
               <>
-                {cardScratches}/{cardScratchesLimit} <span class="text-xs">scratch</span>
+                {cardScratches}/{cardScratchesLimit}
               </>
             )}
           </div>
           {buttonState.value != 'destroy' ? (
-            <div class="text-xs font-bold px-2">
+            <div class="text-sm font-bold px-2 fredoka-condensed-bold">
               Lv.0
             </div>
           ) : (<></>)}
@@ -114,12 +114,12 @@ export const BearCard = component$(() => {
         <div class="bg-amber-300 w-full h-full  rounded-b-md font-bold inline-flex justify-center items-center shadow-md">
           <div class="size-full">
             {buttonState.value === 'timer' ? (
-              <div class="size-full inline-flex items-center justify-center gap-2">
-                <StopWatchImage class="size-6" />
+              <div class="text-sm size-full inline-flex items-center justify-center gap-2 fredoka-condensed-bold">
+                {/* <StopWatchImage class="size-6" /> */}
                 <span>{formatTime(timeLeft.value)}</span>
               </div>
             ) : buttonState.value === 'claim' ? (
-              <button onClick$={handleClaimReward} class="w-full h-full z-20 bg-green-500 text-white">
+              <button onClick$={handleClaimReward} class="text-sm w-full h-full z-20 bg-green-500 text-white">
                 Claim Reward
               </button>
             ) : buttonState.value === 'destroy' ? (
@@ -135,7 +135,7 @@ export const BearCard = component$(() => {
                   Loading
                 </div>
               </div>) : (
-              <button onClick$={clickCard} disabled={disabled.value ? true : undefined} class="w-full h-full bg-amber-400 text-gray-800">
+              <button onClick$={clickCard} disabled={disabled.value ? true : undefined} class="text-sm w-full h-full bg-amber-400 text-gray-800 fredoka-condensed-bold">
                 Farm Mood
               </button>
             )}

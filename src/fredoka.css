@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'FredokaCondensedBold';
+    src: url('/fonts/fredoka/Fredoka_Condensed-Bold.ttf') format('truetype');
+}
+
+.fredoka-condensed-bold{
+    font-family: 'FredokaCondensedBold';
+}
