@@ -73,7 +73,6 @@ export const BearCard = component$(() => {
         // Reward the user
       })
       .catch((result) => {
-        startTimer();
         console.log('❌ Ad error or skipped:', result);
         // Handle error
       });

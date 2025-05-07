@@ -1,13 +1,15 @@
-import { component$, useTask$ } from "@builder.io/qwik";
+import { $, component$, useOnWindow} from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { BearCard } from "~/components/cards";
 import { initAdController } from "~/libs/adsgram";
 
 export default component$(() => {
-  useTask$(() => {
-    initAdController(); // initialize once when the app loads
-  });
-  
+  useOnWindow(
+    'load', $(() => {
+      initAdController();
+    })
+  );
+
   return (
     <>
       <BearCard />
