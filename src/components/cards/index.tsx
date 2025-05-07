@@ -1,4 +1,4 @@
-import { $, component$, useSignal, useTask$, useVisibleTask$ } from "@builder.io/qwik";
+import { $, component$, useSignal, useTask$} from "@builder.io/qwik";
 import BearNeutralEmoji from '~/assets/images/emojis/neutral.png?jsx';
 import BearCryEmoji from '~/assets/images/emojis/cry.png?jsx';
 import BearMoneyEmoji from '~/assets/images/emojis/money.png?jsx';
