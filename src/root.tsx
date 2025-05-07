@@ -28,6 +28,7 @@ export default component$(() => {
           />
         )}
         <RouterHead />
+        <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
       </head>
       <body lang="en">
         <RouterOutlet />

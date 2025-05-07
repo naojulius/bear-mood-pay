@@ -1,15 +1,16 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { BearCard } from "~/components/cards";
+import { initAdController } from "~/libs/adsgram";
 
 export default component$(() => {
+  useVisibleTask$(() => {
+    initAdController(); // initialize once when the app loads
+  });
+  
   return (
     <>
-      <h1>Hi 👋</h1>
-      <div>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </div>
+      <BearCard />
     </>
   );
 });
