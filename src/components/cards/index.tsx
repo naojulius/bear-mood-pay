@@ -56,6 +56,7 @@ export const BearCard = component$(() => {
 
   const handleClaimReward = $(() => {
     if (isCardDestroyed.value) { return }
+    if (disabled.value) { return }
     showMonetagAd().then(() => {
       cardScratches.value += cardScratchesStep.value;
       buttonState.value = "start";
@@ -78,9 +79,9 @@ export const BearCard = component$(() => {
 
   return (
     <>
-      <div class="relative h-52 w-40 rounded-md shadow border-2 border-amber-700 border-b-5 bg-amber-100">
+      <div class="relative w-3/10 h-42 rounded-md shadow border-2 border-amber-700 border-b-5 bg-amber-100 inline-flex flex-col gap-2">
         <div class="w-full inline-flex justify-between items-center">
-          <div class="text-sm font-bold px-2 inline-flex items-center gap-1 w-full">
+          <div class="text-xs font-bold px-2 inline-flex items-center gap-1 w-full">
             {buttonState.value === 'destroy' ? (
               <div class="text-center w-full">
                 limit reached
@@ -92,38 +93,41 @@ export const BearCard = component$(() => {
             )}
           </div>
           {buttonState.value != 'destroy' ? (
-            <div class="text-sm font-bold px-2">
+            <div class="text-xs font-bold px-2">
               Lv.0
             </div>
           ) : (<></>)}
 
         </div>
+        
+        <div class="inline-flex items-center justify-center pt-4">
         {buttonState.value === 'destroy' ? (
-          <BearCryEmoji class="p-6 z-30 transition-all duratio-500" />
-        ) : buttonState.value === 'claim' ? (
-          <BearMoneyEmoji class="p-6 z-30 transition-all duratio-500" />
-        ) : (
-          <BearNeutralEmoji class="p-6 z-30 transition-all duratio-500" />
-        )}
+          <BearCryEmoji class="h-20 w-20  transition-all duratio-500" />
+          ) : buttonState.value === 'claim' ? (
+          <BearMoneyEmoji class="h-20 w-20  transition-all duratio-500" />
+          ) : (
+          <BearNeutralEmoji class="h-20 w-20 transition-all duratio-500" />
+          )}
+        </div>
 
 
         <div class="absolute bottom-0 left-0 h-8 bg-amber-300 w-full  rounded-b-md border-amber-700 font-bold inline-flex justify-center items-center shadow-md">
           <div class="size-full">
             {buttonState.value === 'timer' ? (
-              <>
+              <div class="size-full inline-flex items-center justify-center gap-2">
                 <StopWatchImage class="size-6" />
                 <span>{formatTime(timeLeft.value)}</span>
-              </>
+              </div>
             ) : buttonState.value === 'claim' ? (
-              <button onClick$={handleClaimReward} class="size-full z-20">
+              <button onClick$={handleClaimReward} class="w-full h-full z-20 bg-green-500 text-white">
                 Claim Reward
               </button>
             ) : buttonState.value === 'destroy' ? (
-              <button  class="size-full z-20">
+              <button  class="size-full z-20 text-white bg-red-500">
                 Destroy Card
               </button>
             ) : buttonState.value === 'loading' ? (
-              <div class="size-full inline-flex flex-row gap-1 items-center justify-center">
+              <div class="size-full inline-flex flex-row gap-1 items-center justify-center text-gray-800">
                 <div class="text-2xl animate animate-spin">
                   <IoSyncSolid />
                 </div>
@@ -131,7 +135,7 @@ export const BearCard = component$(() => {
                   Loading
                 </div>
               </div>) : (
-              <button onClick$={clickCard} disabled={disabled.value ? true : undefined} class="w-full h-full bg-amber-400">
+              <button onClick$={clickCard} disabled={disabled.value ? true : undefined} class="w-full h-full bg-amber-400 text-gray-800">
                 Farm Mood
               </button>
             )}
