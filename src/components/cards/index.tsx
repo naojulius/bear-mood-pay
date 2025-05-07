@@ -28,7 +28,7 @@ export const BearCard = component$(() => {
   });
 
   const startTimer = $(() => {
-    if (isCardDestroyed.value) { return };
+    if (isCardDestroyed.value) { return }
     buttonState.value = "timer";
     const interval = setInterval(() => {
       if (timeLeft.value > 0) {
@@ -50,7 +50,7 @@ export const BearCard = component$(() => {
   };
 
   const handleClaimReward = $(() => {
-    if (isCardDestroyed.value) { return };
+    if (isCardDestroyed.value) { return }
     cardScratches.value += cardScratchesStep.value;
     buttonState.value = "start";
     console.log('Reward Claimed!');
@@ -58,8 +58,8 @@ export const BearCard = component$(() => {
   });
 
   const clickCard = $(() => {
-    if (isCardDestroyed.value) { return };
-    if (disabled.value) { return };
+    if (isCardDestroyed.value) { return }
+    if (disabled.value) { return }
     const AdController = getAdController();
     if (!AdController) {
       console.warn('AdController not initialized');

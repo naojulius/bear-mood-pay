@@ -1,4 +1,4 @@
-import { AdsgramController } from "~/types/global";
+import type { AdsgramController } from "~/types/global";
 
 let AdController: AdsgramController | null = null;
 
