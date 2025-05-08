@@ -15,8 +15,8 @@ export const EmojiCard = component$(() => {
     return (
         <>
             <div class="w-1/3 h-42 p-1 bg-white">
-                <div class=" border-1 size-full border-b-5 border-amber-500 rounded-xl shadow-sm">
-                    <div class="px-1 w-full text-sm inline-flex justify-between items-center">
+                <div class=" border-1 size-full border-amber-500 rounded-xl shadow-sm inline-flex flex-col">
+                    <div class="p-1 w-full text-sm inline-flex justify-between items-center">
                         <span class="text-gray-800 font-bold">
                             Lv.0
                         </span>
@@ -29,8 +29,8 @@ export const EmojiCard = component$(() => {
                         alt="Loading animation"
                         class=""
                     />
-                    <div class="-mt-1 h-8 w-full inline-flex justify-center items-center ">
-                        <button onClick$={handleClaimReward} class="size-full bg-amber-200 w-full rounded-b-xl">
+                    <div class="h-8 w-full inline-flex justify-center items-center ">
+                        <button onClick$={handleClaimReward} class="size-full bg-amber-200 w-full rounded-b-xl border-b-5 active:border-b-0 border-amber-500 transition-all duration-100">
                             Farm Card
                         </button>
                     </div>
