@@ -1,13 +1,13 @@
 import { $, component$, useOnWindow } from "@builder.io/qwik";
-import DiamondImage from '~/assets/images/coins/diamond.png?jsx';
+// import DiamondImage from '~/assets/images/coins/diamond.png?jsx';
 import Avatar from '~/assets/images/avatars/wasp.png?jsx';
-
+import { initDataUser } from '@telegram-apps/sdk';
 
 export const NavigationTop = component$(() => {
     
     useOnWindow(
         'load', $(() => {
-            
+            alert(JSON.stringify(initDataUser()))
         })
     );
     
@@ -36,12 +36,12 @@ export const NavigationTop = component$(() => {
                         </span>
                     </div>
                 </div>
-                <div class="w-1/3 h-8 bg-gray-200 rounded-r-full inline-flex items-center justify-between pr-2 border-1 border-l-0">
+                {/* <div class="w-1/3 h-8 bg-gray-200 rounded-r-full inline-flex items-center justify-between pr-2 border-1 border-l-0">
                     <DiamondImage class="size-9 -ml-2 drop-shadow-[0_0_0.05rem_black]" />
                     <div class="font-bold fredoka-condensed-bold">
                         0.0001
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     );

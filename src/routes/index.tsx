@@ -8,7 +8,7 @@ import { Shop } from "~/components/pages/shop";
 import { initMonetagScript } from "~/libs/monetag";
 import { useTabStore } from "~/stores/main.tab.store";
 
-import { initDataAuthDate } from '@telegram-apps/sdk';
+import { init } from '@telegram-apps/sdk';
 
 export default component$(() => {
 
@@ -17,8 +17,7 @@ export default component$(() => {
   useOnWindow(
     'load', $(async () => {
       initMonetagScript();
-      alert(initDataAuthDate());
-      
+      init();
     })
   );
 
