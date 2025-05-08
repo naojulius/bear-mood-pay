@@ -16,7 +16,7 @@ import {
    */
   export const useDiamondStoreProvider = () => {
     const store = useStore<DiamondState>({
-      balance: 0.00
+      balance: 0.001
     });
     useContextProvider(DiamondStoreContext, store);
     return store;

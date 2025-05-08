@@ -8,8 +8,6 @@ import { Shop } from "~/components/pages/shop";
 import { initMonetagScript } from "~/libs/monetag";
 import { useTabStore } from "~/stores/main.tab.store";
 
-import { init } from '@telegram-apps/sdk';
-
 export default component$(() => {
 
   const tabStore = useTabStore();
@@ -17,7 +15,6 @@ export default component$(() => {
   useOnWindow(
     'load', $(async () => {
       initMonetagScript();
-      init();
     })
   );
 
