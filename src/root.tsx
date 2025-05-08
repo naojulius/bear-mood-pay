@@ -28,7 +28,7 @@ export default component$(() => {
             href={`${import.meta.env.BASE_URL}manifest.json`}
           />
         )}
-        <script src="~/third/telegram-web-app.js"></script>
+       <script src="/third/telegram-web-app.js"></script>
         <RouterHead />
        
       </head>
