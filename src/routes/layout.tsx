@@ -1,11 +1,10 @@
-import { $, component$, Slot, useOnWindow } from "@builder.io/qwik";
-import { routeLoader$, type RequestHandler } from "@builder.io/qwik-city";
+import { component$, Slot } from "@builder.io/qwik";
+import { type RequestHandler } from "@builder.io/qwik-city";
 import { FloatingButtons } from "~/components/floating-buttons";
 import { NavigationTop } from "~/components/navigatino-top";
 import { useCoinStoreProvider } from "~/stores/coin.store";
 import { useDiamondStoreProvider } from "~/stores/diamond.store";
 import { useTabStoreProvider } from "~/stores/main.tab.store";
-import { environment } from "~/types/environment";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -18,23 +17,16 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
   });
 };
 
-export const useGetCards = routeLoader$(async () => {
-  const res = await fetch(`${environment.base_api}${environment.api_all_cards}`);
-  const data = await res.json();
-  return data;
-});
+// export const useGetCards = routeLoader$(async () => {
+//   const res = await fetch(`${environment.base_api}${environment.api_all_cards}`);
+//   const data = await res.json();
+//   return data;
+// });
 
 export default component$(() => {
   useDiamondStoreProvider();
   useCoinStoreProvider();
   useTabStoreProvider();
-
-useOnWindow(
-    'load', $(() => {
-      //init telegramme sdk
-      // init();
-    })
-);
 
   return (
     <>
