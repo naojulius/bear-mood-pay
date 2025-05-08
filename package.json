@@ -44,10 +44,9 @@
     "vercel": "^29.1.1",
     "vite": "5.3.5",
     "vite-tsconfig-paths": "^4.2.1",
-    "@telegram-apps/bridge": "^2.8.2",
-    "@telegram-apps/sdk": "^3.9.2"
+    "@telegram-apps/sdk": "^2.11.3"
   },
   "dependencies": {
-
+    
   }
 }

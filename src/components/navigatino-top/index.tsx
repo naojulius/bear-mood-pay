@@ -1,13 +1,17 @@
 import { $, component$, useOnWindow } from "@builder.io/qwik";
 // import DiamondImage from '~/assets/images/coins/diamond.png?jsx';
 import Avatar from '~/assets/images/avatars/wasp.png?jsx';
+import { miniApp } from '@telegram-apps/sdk';
 import { initDataUser } from '@telegram-apps/sdk';
 
 export const NavigationTop = component$(() => {
-    
     useOnWindow(
         'load', $(() => {
-            alert(JSON.stringify(initDataUser()))
+            if (miniApp.mount.isAvailable()) {
+                miniApp.mount();
+                miniApp.isMounted(); // true
+                alert(JSON.stringify(initDataUser()))
+            }
         })
     );
     
