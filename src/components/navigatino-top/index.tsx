@@ -1,12 +1,12 @@
 import { $, component$, useOnWindow } from "@builder.io/qwik";
 // import DiamondImage from '~/assets/images/coins/diamond.png?jsx';
 import Avatar from '~/assets/images/avatars/wasp.png?jsx';
-import { initDataUser } from '@telegram-apps/sdk';
+import { getTelegramUser } from "~/libs/tg";
 
 export const NavigationTop = component$(() => {
     useOnWindow(
         'load', $(() => {
-            alert(JSON.stringify(initDataUser()))
+           alert(JSON.stringify(getTelegramUser()))
         })
     );
     
