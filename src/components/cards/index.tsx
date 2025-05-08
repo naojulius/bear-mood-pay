@@ -6,7 +6,6 @@ import { IoSyncSolid } from "@qwikest/icons/ionicons";
 import { showMonetagAd } from "~/libs/monetag";
 import { addCoins, useCoinStore } from "~/stores/coin.store";
 
-
 export const BearCard = component$(() => {
   const coinStore = useCoinStore();
   
