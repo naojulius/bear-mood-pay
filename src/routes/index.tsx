@@ -1,8 +1,7 @@
-import { $, component$, useOnWindow} from "@builder.io/qwik";
+import { $, component$, useOnWindow } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { CardList } from "~/components/pages/card-list";
-import { Exchange } from "~/components/pages/exchange";
-import { Mail } from "~/components/pages/mail";
+import { Factory } from "~/components/pages/factory";
 import { Setting } from "~/components/pages/setting";
 import { Shop } from "~/components/pages/shop";
 import { initMonetagScript } from "~/libs/monetag";
@@ -20,11 +19,41 @@ export default component$(() => {
 
   return (
     <>
-      {tabStore.activeTab === 'card' && <CardList />}
-      {tabStore.activeTab === 'shop' && <Shop />}
-      {tabStore.activeTab === 'setting' && <Setting />}
-      {tabStore.activeTab === 'exchange' && <Exchange />}
-      {tabStore.activeTab === 'mail' && <Mail />}
+      <div
+        class={[
+          'h-full w-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out',
+          tabStore.activeTab === 'factory' ? 'block' : 'hidden',
+        ]}
+      >
+        <Factory />
+      </div>
+
+      <div
+        class={[
+          'h-full w-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out',
+          tabStore.activeTab === 'card' ? 'block' : 'hidden',
+        ]}
+      >
+        <CardList />
+      </div>
+
+      <div
+        class={[
+          'h-full w-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out',
+          tabStore.activeTab === 'shop' ? 'block' : 'hidden',
+        ]}
+      >
+        <Shop />
+      </div>
+
+      <div
+        class={[
+          'h-full w-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out',
+          tabStore.activeTab === 'setting' ? 'block' : 'hidden',
+        ]}
+      >
+        <Setting />
+      </div>
     </>
   );
 });

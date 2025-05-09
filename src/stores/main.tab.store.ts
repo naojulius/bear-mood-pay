@@ -6,7 +6,7 @@ import {
 } from '@builder.io/qwik';
 
 interface TabState {
-    activeTab: 'card' | 'shop' | 'exchange' | 'setting' | 'mail';
+    activeTab: 'card' | 'shop' | 'exchange' | 'setting' | 'mail' | 'factory';
   }
 
 export const tabStoreContext = createContextId<TabState>('tab-store');
@@ -16,7 +16,7 @@ export const tabStoreContext = createContextId<TabState>('tab-store');
  */
 export const useTabStoreProvider = () => {
     const store = useStore<TabState>({
-        activeTab: 'card'
+        activeTab: 'factory'
     });
     useContextProvider(tabStoreContext, store);
     return store;

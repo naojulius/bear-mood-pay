@@ -1,10 +1,11 @@
 import { component$, Slot } from "@builder.io/qwik";
 import { type RequestHandler } from "@builder.io/qwik-city";
-import { FloatingButtons } from "~/components/floating-buttons";
+import { FloatingButtons } from "~/components/navigation-bottom";
 import { NavigationTop } from "~/components/navigatino-top";
 import { useCoinStoreProvider } from "~/stores/coin.store";
 import { useDiamondStoreProvider } from "~/stores/diamond.store";
 import { useTabStoreProvider } from "~/stores/main.tab.store";
+import { useLabsStoreProvider } from "~/stores/labs.store";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -27,6 +28,7 @@ export default component$(() => {
   useDiamondStoreProvider();
   useCoinStoreProvider();
   useTabStoreProvider();
+  useLabsStoreProvider();
 
   return (
     <>
