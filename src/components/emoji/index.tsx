@@ -7,11 +7,10 @@ import {
 import type  { EmojiProcessingQueue } from "~/libs/queue/emoji-processing.queue";
 import  { get, set } from 'idb-keyval';
 import  { EMOJIS } from "~/libs/emoji";
-import ImgYawn from '~/assets/images/icons/yawn.png?jsx';
 
 export const EmojiCard = component$(() => {
     const tempQueue = useSignal<EmojiProcessingQueue[]>([]);
-
+    const emojiSource = useSignal("yawn");
     const handleQueue = $(() => {
         const id = Math.floor(Math.random() * 10000) + 1;
 
@@ -49,12 +48,13 @@ export const EmojiCard = component$(() => {
                     <span class="text-gray-800 font-bold">Lv.0</span>
                     <span class="text-xs text-green-500 font-bold">0/50</span>
                 </div>
-                {/* <img
-                    src="/images/emojis/yawn.png"
-                    alt="Emoji"
-                    class=""
-                /> */}
-                <ImgYawn />
+                <img
+            width="100"
+            height="100"
+            src={`/images/emojis/${emojiSource.value}.png`}
+            alt="Emoji"
+            class=""
+          />
                 <div class="h-8 w-full inline-flex justify-center items-center">
                     <button
                         onClick$={handleQueue}
