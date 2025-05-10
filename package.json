@@ -26,6 +26,7 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.13.0",
     "@builder.io/qwik-city": "^1.13.0",
+    "@ditadi/qwik-hooks": "^0.1.6",
     "@qwikest/icons": "^0.0.13",
     "@tailwindcss/vite": "^4.0.0",
     "@types/eslint": "8.56.10",
@@ -47,6 +48,7 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
+    "idb-keyval": "^6.2.2",
     "three": "^0.176.0"
   }
 }
