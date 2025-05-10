@@ -48,6 +48,7 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
+    "@tonconnect/sdk": "^3.1.0",
     "idb-keyval": "^6.2.2",
     "three": "^0.176.0"
   }

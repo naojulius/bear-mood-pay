@@ -1,5 +1,5 @@
 // src/components/ThreeViewer.tsx
-import { $, component$, useOnWindow, useTask$, useVisibleTask$ } from '@builder.io/qwik';
+import { $, component$, useOnWindow} from '@builder.io/qwik';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -8,7 +8,7 @@ export const ThreeDViewer = component$(() => {
     'load', $(async () => {
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(
-        45,
+        50,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
@@ -23,8 +23,8 @@ export const ThreeDViewer = component$(() => {
       light.position.set(0, 200, 0);
       scene.add(light);
 
-      camera.position.set(10, 5, 10);
-      camera.lookAt(0, 1, 0);
+      camera.position.set(10, 5, 5);
+      camera.lookAt(0, 1.5, 0);
 
       // Load GLB model
       const loader = new GLTFLoader();

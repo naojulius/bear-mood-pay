@@ -1,10 +1,10 @@
-import { $, component$, Signal, useOnWindow, useSignal } from "@builder.io/qwik";
+import { $, component$, useOnWindow, useSignal } from "@builder.io/qwik";
 import { getTelegramUser } from "~/libs/tg";
 import ProfileImage from '~/assets/images/avatars/crab.png?jsx';
-import { User } from "~/libs/user/user";
+import type { User } from "~/libs/user/user";
 
 export const Profile = component$(() => {
-    const user: Signal<User> = useSignal({} as User);
+    const user = useSignal({} as User);
     useOnWindow(
         'load', $(() => {
             user.value = getTelegramUser();

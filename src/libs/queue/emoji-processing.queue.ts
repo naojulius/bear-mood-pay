@@ -1,4 +1,4 @@
-import { Emoji } from "../emoji/emoji";
+import type { Emoji } from "../emoji/emoji";
 
 export class EmojiProcessingQueue{
     "id": number;

@@ -1,4 +1,4 @@
-import { User } from "./user/user";
+import type { User } from "./user/user";
 
 // src/lib/getTelegramUser.ts
 export const getTelegramUser = (): any | null => {

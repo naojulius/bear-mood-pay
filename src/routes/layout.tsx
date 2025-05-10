@@ -5,7 +5,6 @@ import { NavigationTop } from "~/components/navigatino-top";
 import { useCoinStoreProvider } from "~/stores/coin.store";
 import { useDiamondStoreProvider } from "~/stores/diamond.store";
 import { useTabStoreProvider } from "~/stores/main.tab.store";
-import { useLabsStoreProvider } from "~/stores/labs.store";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -28,7 +27,6 @@ export default component$(() => {
   useDiamondStoreProvider();
   useCoinStoreProvider();
   useTabStoreProvider();
-  useLabsStoreProvider();
 
   return (
     <>

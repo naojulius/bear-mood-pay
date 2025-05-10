@@ -6,47 +6,21 @@ import {
   useSignal,
 } from "@builder.io/qwik";
 import { ThreeDViewer } from "../factory";
-import { EmojiProcessingQueue } from "~/libs/queue/emoji-processing.queue";
-import { get, set, update } from 'idb-keyval';
+import type { EmojiProcessingQueue } from "~/libs/queue/emoji-processing.queue";
+import { get, set } from 'idb-keyval';
 import RocketImage from '~/assets/images/icons/fan.png?jsx';
 import StarImage from '~/assets/images/icons/star.png?jsx';
+import { showMonetagAd } from "~/libs/monetag";
 
 // Qwik Component
 export const Factory = component$(() => {
   const isProcessing = useSignal(false);
 
-  const progress = useSignal(0); // 0 to 100
-  const duration = 10; // in seconds
+  const progress = useSignal(0);
   const currentEmoji = useSignal("");
   const remainProcessingEmoji = useSignal(0)
-
-
-  // const processEmoji = $((item: EmojiProcessingQueue) => {
-  //   return new Promise<void>((resolve) => {
-  //     const total = item.emoji.processingTimeInSecond;
-  //     item.remainingTime = total;
-
-  //     const interval = setInterval(() => {
-  //       if (item.remainingTime! > 0) {
-  //         item.remainingTime!--;
-  //       }
-  //     }, 1000);
-
-  //     setTimeout(() => {
-  //       clearInterval(interval);
-  //       console.log(`✅ Finished processing ${item.emoji.name} with Id: ${item.emoji.id}`);
-
-  //       // Optionally remove it from the queue in storage
-  //       get('em').then((queue: EmojiProcessingQueue[] = []) => {
-  //         const updated = queue.filter(q => q.emoji.id !== item.emoji.id);
-  //         console.log(updated.length)
-  //         set('em', updated);
-  //       });
-
-  //       resolve();
-  //     }, total * 1000);
-  //   });
-  // });
+  const currentBoost = useSignal(1);
+  const boostLimit = useSignal(5);
 
   const processEmoji = $((item: EmojiProcessingQueue) => {
     return new Promise<void>((resolve) => {
@@ -125,8 +99,23 @@ export const Factory = component$(() => {
     return currentEmoji.value;
   })
 
-  const remainEmoji = useComputed$(() => {
-    return remainProcessingEmoji.value;
+  const handleBoost = $(async () => {
+    if (currentBoost.value >= boostLimit.value){return}
+    try {
+      await showMonetagAd();
+      currentBoost.value += 1;
+    } catch (err) {
+      //console.error('Failed to show ad:', err);
+    }
+    
+  })
+
+  const currentBoostVal =  useComputed$(() => {
+   return currentBoost.value;
+  })
+  const disableBoostButton = useComputed$(() => {
+    if (currentBoost.value >= boostLimit.value){return true}
+    else{return false}
   })
 
   return (
@@ -143,15 +132,17 @@ export const Factory = component$(() => {
             </div>
             <div class="w-full pt-2 inline-flex gap-2 items-center">
               <div class="h-[100px] w-[100px] min-w-[100px] bg-gray-200 rounded-lg inline-flex items-center justify-center">
-                <img
+                <img 
+                  width="100"
+                  height="100"
                   src={`/images/emojis/${emojiSource.value}.png`}
                   alt="Emoji"
-                  class="" />
+                  class="h-full w-full" />
               </div>
               <div class="w-full inline-flex flex-col">
                 <div class="text-md font-bold">Processing {emojiName.value} + {remainProcessingEmoji.value}</div>
                 <div class="text-sm text-gray-400">
-                  Embrace every shade of your mood, for within each feeling lies a hidden trove of gems — and the deeper you explore, the greater the rewards you’ll uncover.
+                  Embrace every shade of your mood, for within each feeling lies a hidden trove of gems.
                 </div>
               </div>
             </div>
@@ -159,11 +150,16 @@ export const Factory = component$(() => {
         </div>
         <div class="absolute bottom-10 left-0 w-full">
           <div class="w-full buttons text-lg  p-2 inline-flex items-center justify-center gap-2">
-            <button class=" w-36 items-center justify-between inline-flex flex-row gap-2 fredoka-condensed-bold transition-all duration-50 px-4 p-2 font-bold text-lg bg-amber-100 text-amber-900 rounded-xl border-t-amber-900 active:border-t-2 border-2 border-t-4 border-b-1">
+            <button 
+              disabled={disableBoostButton.value}
+              onClick$={handleBoost}
+              class="
+              disabled:bg-gray-200
+              w-auto items-center justify-between inline-flex flex-row gap-2 fredoka-condensed-bold transition-all duration-50 px-2 font-bold text-lg bg-amber-100 text-amber-900 rounded-xl border-t-amber-900  border-1 active:bg-amber-400">
               <RocketImage class="size-12 animate animate-spin" />
-              <div>Boost</div>
+              <div>Boost x{currentBoostVal.value}</div>
             </button>
-            <button class=" w-36 items-center inline-flex flex-row gap-2 fredoka-condensed-bold transition-all duration-50 px-4 p-2 font-bold text-lg bg-amber-100 text-amber-900 rounded-xl border-t-amber-900 active:border-t-2 border-2 border-t-4 border-b-1">
+            <button class="w-36 items-center inline-flex flex-row gap-2 fredoka-condensed-bold transition-all duration-50 px-2 font-bold text-lg bg-amber-100 text-amber-900 rounded-xl border-t-amber-900 border-1 active:bg-amber-400">
             <div>Upgrade</div>
             <StarImage class="size-12 animate animate-bounce" />
             </button>
