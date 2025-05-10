@@ -7,7 +7,7 @@ import {
 import type  { EmojiProcessingQueue } from "~/libs/queue/emoji-processing.queue";
 import  { get, set } from 'idb-keyval';
 import  { EMOJIS } from "~/libs/emoji";
-import ImgYawn from '~/media/images/emojis/yawn.png?jsx';
+import ImgYawn from '~/assets/images/icons/yawn.png?jsx';
 
 export const EmojiCard = component$(() => {
     const tempQueue = useSignal<EmojiProcessingQueue[]>([]);
