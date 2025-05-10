@@ -1,0 +1,20 @@
+export const EMOJIS = [
+    "angry-devil",
+    "astonished",
+    "cold-sweat", 
+    "cold",
+    "confused",
+    "disapointed",
+    "explosive",
+    "fear",
+    "grin",
+    "hand-over-mouth",
+    "hot",
+    "poop",
+    "rage",
+    "spiral-eyes",
+    "struck",
+    "triumph",
+    "yawn",
+    "zany"
+]

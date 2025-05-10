@@ -8,6 +8,7 @@ import {
   import { EmojiProcessingQueue } from "~/libs/queue/emoji-processing.queue";
   import { useLabsStore } from "~/stores/labs.store";
   import { get, set } from 'idb-keyval';
+import { EMOJIS } from "~/libs/emoji";
   
   export const EmojiCard = component$(() => {
     const labStore = useLabsStore();
@@ -24,7 +25,7 @@ import {
         isDone: false,
         emoji: {
           id,
-          name: 'hunger',
+          name: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
           level: 0,
           scratch: 0,
           processingTimeInSecond: 3,
@@ -38,10 +39,11 @@ import {
           console.log('Emoji added to queue');
         }).catch((err) => console.error('Failed to queue emoji', err));
       });
+      
     });
   
     const queued = useComputed$(() => {
-      return labStore.queue.length;
+      return tempQueue.value.length;
     });
   
     return (
